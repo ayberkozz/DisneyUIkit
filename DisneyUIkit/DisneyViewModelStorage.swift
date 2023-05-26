@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import UIKit
 
 protocol DisneyViewModelOutput : AnyObject {
+//    func updateView(name: String, characterImageURL : URL)
     func updateView(name: String)
 }

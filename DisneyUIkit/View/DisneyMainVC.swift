@@ -13,11 +13,7 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
     
     private let viewModel : DisneyViewModel
     private var characterNames: [String] = []
-
-    func updateView(name: String) {
-        characterNames.append(name)
-        tableView.reloadData()
-    }
+    private var characterImages : [URL] = []
     
     
     init(viewModel: DisneyViewModel) {
@@ -30,6 +26,19 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
         fatalError("init(coder:) has not been implemented")
     }
     
+//    func updateView(name: String, characterImageURL: URL) {
+//        characterNames.append(name)
+//        characterImages.append(characterImageURL)
+//        tableView.reloadData()
+//    }
+    
+    func updateView(name: String) {
+        characterNames.append(name)
+//        characterImages.append(characterImageURL)
+        tableView.reloadData()
+    }
+
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +46,6 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
         view.backgroundColor = .blue
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         viewModel.fetchCharacters()
         
@@ -45,20 +53,25 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
         layout()
     }
     
-    func style(){
-        tableView.frame = view.bounds
+    private func style(){
         title = "Disney Characters"
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .systemBackground
+        tableView.allowsSelection = false
+        tableView.register(CustomDisneyCell.self, forCellReuseIdentifier: CustomDisneyCell.identifier)
+        
     }
     
-    func layout() {
+    private func layout() {
         
         view.addSubview(tableView)
         
-//        NSLayoutConstraint.activate([
-//
-//            tableView.heightAnchor.constraint(equalToConstant: view.frame.height),
-//            tableView.widthAnchor.constraint(equalToConstant: view.frame.width),
-//        ])
+        NSLayoutConstraint.activate([
+
+            tableView.heightAnchor.constraint(equalToConstant: view.frame.height),
+            tableView.widthAnchor.constraint(equalToConstant: view.frame.width),
+        ])
         
     }
 
@@ -72,8 +85,15 @@ extension DisneyMainVC : UITableViewDelegate,UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = characterNames[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomDisneyCell.identifier, for: indexPath) as? CustomDisneyCell else {
+            fatalError("The Table View Could not a custom cell in vc")
+        }
+        
+        let nameLabel = self.characterNames[indexPath.row]
+//        let characterImage = self.characterImages[indexPath.row]
+//        cell.configure(with: nameLabel, and: characterImage)
+        cell.configure(with: nameLabel)
+        
         return cell
     }
 

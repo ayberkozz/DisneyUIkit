@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class DisneyViewModel {
     
@@ -17,14 +18,18 @@ class DisneyViewModel {
     }
     
     func fetchCharacters() {
-        disneyService.fetchChracters { [weak self] result in
+        disneyService.fetchCharacters { [weak self] result in
             switch result {
             case .success(let character):
                 for disneyModel1 in character.data {
+//                    self?.output?.updateView(name: disneyModel1.name, characterImageURL: URL(string:disneyModel1.imageURL)!)
                     self?.output?.updateView(name: disneyModel1.name)
+
                 }
             case .failure(_):
+//                self?.output?.updateView(name: "No user", characterImageURL: URL(string: "")!)
                 self?.output?.updateView(name: "No user")
+
             }
             
         }

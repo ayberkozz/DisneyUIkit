@@ -8,12 +8,12 @@
 import Foundation
 
 protocol DisneyServiceProtocol {
-    func fetchChracters(completion: @escaping(Result<DisneyModel,Error>)->Void)
+    func fetchCharacters(completion: @escaping(Result<DisneyModel,Error>)->Void)
 }
 
 class DisneyService : DisneyServiceProtocol{
     
-    func fetchChracters(completion: @escaping(Result<DisneyModel,Error>)->Void) {
+    func fetchCharacters(completion: @escaping(Result<DisneyModel,Error>)->Void) {
         
         let url = URL(string: "https://api.disneyapi.dev/character")!
         

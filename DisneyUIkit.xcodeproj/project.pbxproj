@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B091B012A20CF9A00966381 /* CustomDisneyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B091B002A20CF9A00966381 /* CustomDisneyCell.swift */; };
 		4B8FFD422A1FE72600A7CEE6 /* DisneyViewModelStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8FFD412A1FE72600A7CEE6 /* DisneyViewModelStorage.swift */; };
 		4BBF2C172A1D611C007BB8A8 /* DisneyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBF2C162A1D611C007BB8A8 /* DisneyModel.swift */; };
 		4BBF2C192A1D624D007BB8A8 /* DisneyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBF2C182A1D624D007BB8A8 /* DisneyService.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B091B002A20CF9A00966381 /* CustomDisneyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDisneyCell.swift; sourceTree = "<group>"; };
 		4B8FFD412A1FE72600A7CEE6 /* DisneyViewModelStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisneyViewModelStorage.swift; sourceTree = "<group>"; };
 		4BBF2C162A1D611C007BB8A8 /* DisneyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisneyModel.swift; sourceTree = "<group>"; };
 		4BBF2C182A1D624D007BB8A8 /* DisneyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisneyService.swift; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B091AFF2A20CF8500966381 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4B091B002A20CF9A00966381 /* CustomDisneyCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		4BD9BEBA2A1D600200F06212 = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				4BD9BECA2A1D600200F06212 /* DisneyMainVC.swift */,
+				4B091AFF2A20CF8500966381 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -178,6 +189,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B091B012A20CF9A00966381 /* CustomDisneyCell.swift in Sources */,
 				4BBF2C1B2A1E81C1007BB8A8 /* DisneyViewModel.swift in Sources */,
 				4BD9BECB2A1D600200F06212 /* DisneyMainVC.swift in Sources */,
 				4BBF2C172A1D611C007BB8A8 /* DisneyModel.swift in Sources */,
