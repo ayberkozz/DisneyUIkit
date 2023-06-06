@@ -12,8 +12,6 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
     let tableView = UITableView()
     
     private let viewModel : DisneyViewModel
-    private var characterNames: [String] = []
-    private var characterImages : [URL] = []
     private lazy var characters: [DisneyModel1] = []
 
     
@@ -29,8 +27,6 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
     
     func updateView(values: [DisneyModel1]) {
         characters = values
-        characterNames = values.map { $0.name }
-        characterImages = values.map { URL(string: $0.imageURL) ?? URL(fileURLWithPath: "") }
         self.tableView.reloadData()
     }
 
@@ -77,7 +73,7 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
 //MARK: - Table View
 extension DisneyMainVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return characterNames.count
+        return characters.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
