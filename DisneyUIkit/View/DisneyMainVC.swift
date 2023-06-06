@@ -27,17 +27,6 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    func updateView(name: String, characterImageURL: URL) {
-//        characterNames.append(name)
-//        characterImages.append(characterImageURL)
-//        tableView.reloadData()
-//    }
-    
-//    func updateView(name: String) {
-//        characterNames.append(name)
-//        tableView.reloadData()
-//    }
-    
     func updateView(values: [DisneyModel1]) {
         characters = values
         characterNames = values.map { $0.name }
@@ -96,14 +85,7 @@ extension DisneyMainVC : UITableViewDelegate,UITableViewDataSource {
             fatalError("The Table View Could not a custom cell in vc")
         }
         
-//        let nameLabel = self.characterNames[indexPath.row]
-//        let characterImage = self.characterImages[indexPath.row]
-//        cell.configure(with: nameLabel, and: characterImage)
-//        cell.configure(with: nameLabel)
-        
-        
         cell.configure(with: characters[indexPath.row])
-        
         return cell
     }
     

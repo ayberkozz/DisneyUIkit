@@ -72,15 +72,6 @@ class CustomDisneyCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    public func configure(with nameLabel : String, and characterImage : UIImage) {
-//        self.nameLabel.text = nameLabel
-//        self.characterImage.sd_setImage(with: <#T##URL?#>)
-//    }
-    
-//    public func configure(with nameLabel : String) {
-//        self.nameLabel.text = nameLabel
-//    }
-    
     public func configure(with disney:DisneyModel1) {
         self.disney = disney
         self.nameLabel.text = disney.name
