@@ -10,5 +10,6 @@ import UIKit
 
 protocol DisneyViewModelOutput : AnyObject {
 //    func updateView(name: String, characterImageURL : URL)
-    func updateView(name: String)
+//    func updateView(name: String)
+    func updateView(values: [DisneyModel1])
 }

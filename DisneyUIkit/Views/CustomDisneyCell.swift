@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CustomDisneyCell: UITableViewCell {
     
 
     static let identifier = "CustomCell"
-    
+    private(set) var disney: DisneyModel1!
+
     private let Hstack : UIStackView = {
         let Hstack = UIStackView()
         Hstack.axis = .horizontal
@@ -52,6 +54,11 @@ class CustomDisneyCell: UITableViewCell {
             Hstack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             Hstack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 
+            characterImage.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            characterImage.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
+            characterImage.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.75),
+            characterImage.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.75),
+            
         ])
         
     }
@@ -67,12 +74,24 @@ class CustomDisneyCell: UITableViewCell {
     
 //    public func configure(with nameLabel : String, and characterImage : UIImage) {
 //        self.nameLabel.text = nameLabel
-//        self.characterImage.image = characterImage
+//        self.characterImage.sd_setImage(with: <#T##URL?#>)
 //    }
     
-    public func configure(with nameLabel : String) {
-        self.nameLabel.text = nameLabel
+//    public func configure(with nameLabel : String) {
+//        self.nameLabel.text = nameLabel
+//    }
+    
+    public func configure(with disney:DisneyModel1) {
+        self.disney = disney
+        self.nameLabel.text = disney.name
+        self.characterImage.sd_setImage(with: URL(string:disney.imageURL))
     }
     
+    //MARK: - PrepareForReuse
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.nameLabel.text = nil
+        self.characterImage.image = nil
+    }
 }
 

@@ -14,7 +14,8 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
     private let viewModel : DisneyViewModel
     private var characterNames: [String] = []
     private var characterImages : [URL] = []
-    
+    private lazy var characters: [DisneyModel1] = []
+
     
     init(viewModel: DisneyViewModel) {
         self.viewModel = viewModel
@@ -32,13 +33,17 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
 //        tableView.reloadData()
 //    }
     
-    func updateView(name: String) {
-        characterNames.append(name)
-//        characterImages.append(characterImageURL)
-        tableView.reloadData()
-    }
-
+//    func updateView(name: String) {
+//        characterNames.append(name)
+//        tableView.reloadData()
+//    }
     
+    func updateView(values: [DisneyModel1]) {
+        characters = values
+        characterNames = values.map { $0.name }
+        characterImages = values.map { URL(string: $0.imageURL) ?? URL(fileURLWithPath: "") }
+        self.tableView.reloadData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,8 +74,10 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
         
         NSLayoutConstraint.activate([
 
-            tableView.heightAnchor.constraint(equalToConstant: view.frame.height),
-            tableView.widthAnchor.constraint(equalToConstant: view.frame.width),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
     }
@@ -89,12 +96,19 @@ extension DisneyMainVC : UITableViewDelegate,UITableViewDataSource {
             fatalError("The Table View Could not a custom cell in vc")
         }
         
-        let nameLabel = self.characterNames[indexPath.row]
+//        let nameLabel = self.characterNames[indexPath.row]
 //        let characterImage = self.characterImages[indexPath.row]
 //        cell.configure(with: nameLabel, and: characterImage)
-        cell.configure(with: nameLabel)
+//        cell.configure(with: nameLabel)
+        
+        
+        cell.configure(with: characters[indexPath.row])
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 88
     }
 
 
