@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4B091B012A20CF9A00966381 /* CustomDisneyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B091B002A20CF9A00966381 /* CustomDisneyCell.swift */; };
+		4B0F1A342A2FE374006CFF78 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0F1A332A2FE374006CFF78 /* DetailViewModel.swift */; };
+		4B0F1A362A2FE465006CFF78 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0F1A352A2FE465006CFF78 /* DetailVC.swift */; };
 		4B8FFD422A1FE72600A7CEE6 /* DisneyViewModelStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8FFD412A1FE72600A7CEE6 /* DisneyViewModelStorage.swift */; };
 		4BBF2C172A1D611C007BB8A8 /* DisneyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBF2C162A1D611C007BB8A8 /* DisneyModel.swift */; };
 		4BBF2C192A1D624D007BB8A8 /* DisneyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBF2C182A1D624D007BB8A8 /* DisneyService.swift */; };
@@ -22,6 +24,8 @@
 
 /* Begin PBXFileReference section */
 		4B091B002A20CF9A00966381 /* CustomDisneyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDisneyCell.swift; sourceTree = "<group>"; };
+		4B0F1A332A2FE374006CFF78 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		4B0F1A352A2FE465006CFF78 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		4B8FFD412A1FE72600A7CEE6 /* DisneyViewModelStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisneyViewModelStorage.swift; sourceTree = "<group>"; };
 		4BBF2C162A1D611C007BB8A8 /* DisneyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisneyModel.swift; sourceTree = "<group>"; };
 		4BBF2C182A1D624D007BB8A8 /* DisneyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisneyService.swift; sourceTree = "<group>"; };
@@ -77,7 +81,7 @@
 				4BD9BEDD2A1D60CC00F06212 /* Service */,
 				4BD9BEDA2A1D60BA00F06212 /* Model */,
 				4BD9BEDC2A1D60C200F06212 /* ViewModel */,
-				4BD9BEDB2A1D60BE00F06212 /* View */,
+				4BD9BEDB2A1D60BE00F06212 /* Controllers */,
 				4BC0E0DF2A2E875200A67DD4 /* Views */,
 				4BD9BEC62A1D600200F06212 /* AppDelegate.swift */,
 				4BD9BEC82A1D600200F06212 /* SceneDelegate.swift */,
@@ -96,12 +100,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4BD9BEDB2A1D60BE00F06212 /* View */ = {
+		4BD9BEDB2A1D60BE00F06212 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				4BD9BECA2A1D600200F06212 /* DisneyMainVC.swift */,
+				4B0F1A352A2FE465006CFF78 /* DetailVC.swift */,
 			);
-			path = View;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		4BD9BEDC2A1D60C200F06212 /* ViewModel */ = {
@@ -109,6 +114,7 @@
 			children = (
 				4BBF2C1A2A1E81C1007BB8A8 /* DisneyViewModel.swift */,
 				4B8FFD412A1FE72600A7CEE6 /* DisneyViewModelStorage.swift */,
+				4B0F1A332A2FE374006CFF78 /* DetailViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -201,6 +207,8 @@
 				4BBF2C1B2A1E81C1007BB8A8 /* DisneyViewModel.swift in Sources */,
 				4BD9BECB2A1D600200F06212 /* DisneyMainVC.swift in Sources */,
 				4BBF2C172A1D611C007BB8A8 /* DisneyModel.swift in Sources */,
+				4B0F1A342A2FE374006CFF78 /* DetailViewModel.swift in Sources */,
+				4B0F1A362A2FE465006CFF78 /* DetailVC.swift in Sources */,
 				4B8FFD422A1FE72600A7CEE6 /* DisneyViewModelStorage.swift in Sources */,
 				4BD9BEC72A1D600200F06212 /* AppDelegate.swift in Sources */,
 				4BD9BEC92A1D600200F06212 /* SceneDelegate.swift in Sources */,

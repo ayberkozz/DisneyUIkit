@@ -25,6 +25,7 @@ class CustomDisneyCell: UITableViewCell {
     private let characterImage : UIImageView = {
         let characterImage = UIImageView()
         characterImage.contentMode = .scaleAspectFit
+        characterImage.clipsToBounds = true
         return characterImage
     }()
     
@@ -35,6 +36,12 @@ class CustomDisneyCell: UITableViewCell {
         nameLabel.font = .systemFont(ofSize: 24, weight: .medium)
         return nameLabel
     }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        characterImage.layer.cornerRadius = characterImage.frame.size.width / 2
+    }
+
     
     func layout() {
         
@@ -85,4 +92,5 @@ class CustomDisneyCell: UITableViewCell {
         self.characterImage.image = nil
     }
 }
+
 

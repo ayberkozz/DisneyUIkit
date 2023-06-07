@@ -48,7 +48,7 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .systemBackground
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         tableView.register(CustomDisneyCell.self, forCellReuseIdentifier: CustomDisneyCell.identifier)
         
     }
@@ -83,6 +83,14 @@ extension DisneyMainVC : UITableViewDelegate,UITableViewDataSource {
         
         cell.configure(with: characters[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+
+        let vm = DetailViewModel(characters[indexPath.row])
+        let vc = DetailVC(vm)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
