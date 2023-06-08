@@ -10,6 +10,7 @@ import UIKit
 class DisneyMainVC: UIViewController,DisneyViewModelOutput {
     
     var collectionView : UICollectionView!
+    private let searchController = UISearchController(searchResultsController: nil)
     
     private let viewModel : DisneyViewModel
     private lazy var characters: [DisneyModel1] = []
@@ -36,6 +37,7 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
         
         style()
         layout()
+        setupSearchController()
     }
     
     private func style(){
@@ -64,19 +66,49 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
         
     }
 
+    private func setupSearchController() {
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Search Character"
+        
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = false
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        
+        searchController.delegate = self
+        searchController.searchBar.delegate = self
+        searchController.searchBar.showsBookmarkButton = true
+        searchController.searchBar.setImage(UIImage(systemName: "line.horizontal.3.decrease"), for: .bookmark, state: .normal)
+    }
+}
 
+//MARK: - Search Controller Functions
+
+extension DisneyMainVC: UISearchResultsUpdating,UISearchControllerDelegate, UISearchBarDelegate {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        self.viewModel.updateSearchController(searchBarText: searchController.searchBar.text)
+    }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        print("Search bar button called!")
+    }
 }
 
 //MARK: - Collection View
 extension DisneyMainVC: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return characters.count
+        let inSearchMode = self.viewModel.inSerchMode(searchController)
+        return inSearchMode ? self.viewModel.filteredCharacters.count : self.viewModel.AllCharacters.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCollectionViewCell", for: indexPath) as! CustomCollectionViewCell
-        cell.configure(with: characters[indexPath.row])
+        let inSearchMode = self.viewModel.inSerchMode(searchController)
+        let disney = inSearchMode ? self.viewModel.filteredCharacters[indexPath.row] : self.viewModel.AllCharacters[indexPath.row]
+        cell.configure(with: disney)
         return cell
     }
     
@@ -85,7 +117,9 @@ extension DisneyMainVC: UICollectionViewDelegate,UICollectionViewDataSource,UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vm = DetailViewModel(characters[indexPath.row])
+        let inSearchMode = self.viewModel.inSerchMode(searchController)
+        let disney = inSearchMode ? self.viewModel.filteredCharacters[indexPath.row] : self.viewModel.AllCharacters[indexPath.row]
+        let vm = DetailViewModel(disney)
         let vc = DetailVC(vm)
         self.navigationController?.pushViewController(vc, animated: true)
     }

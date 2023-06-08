@@ -30,9 +30,9 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     private let nameLabel : UILabel = {
         let nameLabel = UILabel()
-        nameLabel.textColor = .black
+        nameLabel.textColor = .white
         nameLabel.textAlignment = .left
-        nameLabel.font = .systemFont(ofSize: 24, weight: .medium)
+        nameLabel.font = .systemFont(ofSize: 24, weight: .semibold)
         nameLabel.numberOfLines = 0
         return nameLabel
     }()
@@ -59,8 +59,11 @@ class CustomCollectionViewCell: UICollectionViewCell {
             
             Vstack.heightAnchor.constraint(equalTo: contentView.heightAnchor),
             Vstack.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            
+            Vstack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+
             characterImage.topAnchor.constraint(equalToSystemSpacingBelow: Vstack.topAnchor, multiplier: 1),
+            characterImage.heightAnchor.constraint(equalToConstant: contentView.frame.size.height / 1.5),
+            characterImage.widthAnchor.constraint(equalToConstant: contentView.frame.size.width / 1.2),
             characterImage.centerXAnchor.constraint(equalTo: Vstack.centerXAnchor),
             
             nameLabel.topAnchor.constraint(equalTo: characterImage.bottomAnchor, constant: 8),

@@ -13,6 +13,14 @@ class DisneyViewModel {
     private let disneyService : DisneyService
     weak var output : DisneyViewModelOutput?
     
+    private (set) var AllCharacters: [DisneyModel1] = [] {
+        didSet {
+            output?.updateView(values: AllCharacters)
+        }
+    }
+    
+    private(set) var filteredCharacters: [DisneyModel1] = []
+    
     init(disneyService: DisneyService) {
         self.disneyService = disneyService
     }
@@ -21,12 +29,38 @@ class DisneyViewModel {
         disneyService.fetchCharacters { [weak self] result in
             switch result {
             case .success(let character):
-                self?.output?.updateView(values: character.data)
+                self?.AllCharacters = character.data
+//                self?.output?.updateView(values: character.data)
             case .failure(_):
-                self?.output?.updateView(values: [])
+                self?.AllCharacters = []
+//                self?.output?.updateView(values: [])
             }
             
         }
     }
     
+}
+
+extension DisneyViewModel {
+    public func inSerchMode(_ searchController: UISearchController) -> Bool {
+        let isActive = searchController.isActive
+        let searchText = searchController.searchBar.text ?? ""
+        
+        return isActive && !searchText.isEmpty
+    }
+    
+    
+    public func updateSearchController(searchBarText: String?) {
+        self.filteredCharacters = AllCharacters
+        
+        if let searchText = searchBarText?.lowercased() {
+            guard !searchText.isEmpty else {self.output?.updateView(values: []); return}
+            
+            self.filteredCharacters = self.filteredCharacters.filter({
+                $0.name.lowercased().contains(searchText)
+            })
+        }
+        self.output?.updateView(values: self.AllCharacters)
+    }
+
 }
