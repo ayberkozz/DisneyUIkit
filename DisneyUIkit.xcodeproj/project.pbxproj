@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4B091B012A20CF9A00966381 /* CustomDisneyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B091B002A20CF9A00966381 /* CustomDisneyCell.swift */; };
 		4B0F1A342A2FE374006CFF78 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0F1A332A2FE374006CFF78 /* DetailViewModel.swift */; };
 		4B0F1A362A2FE465006CFF78 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0F1A352A2FE465006CFF78 /* DetailVC.swift */; };
 		4B8FFD422A1FE72600A7CEE6 /* DisneyViewModelStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8FFD412A1FE72600A7CEE6 /* DisneyViewModelStorage.swift */; };
@@ -20,10 +19,10 @@
 		4BD9BECB2A1D600200F06212 /* DisneyMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9BECA2A1D600200F06212 /* DisneyMainVC.swift */; };
 		4BD9BED02A1D600300F06212 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BD9BECF2A1D600300F06212 /* Assets.xcassets */; };
 		4BD9BED32A1D600300F06212 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BD9BED12A1D600300F06212 /* LaunchScreen.storyboard */; };
+		4BF7DD072A31CF1800F98F92 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7DD062A31CF1800F98F92 /* CustomCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4B091B002A20CF9A00966381 /* CustomDisneyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDisneyCell.swift; sourceTree = "<group>"; };
 		4B0F1A332A2FE374006CFF78 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		4B0F1A352A2FE465006CFF78 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		4B8FFD412A1FE72600A7CEE6 /* DisneyViewModelStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisneyViewModelStorage.swift; sourceTree = "<group>"; };
@@ -37,6 +36,7 @@
 		4BD9BECF2A1D600300F06212 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4BD9BED22A1D600300F06212 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4BD9BED42A1D600300F06212 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4BF7DD062A31CF1800F98F92 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +54,7 @@
 		4BC0E0DF2A2E875200A67DD4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4B091B002A20CF9A00966381 /* CustomDisneyCell.swift */,
+				4BF7DD062A31CF1800F98F92 /* CustomCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,7 +203,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B091B012A20CF9A00966381 /* CustomDisneyCell.swift in Sources */,
 				4BBF2C1B2A1E81C1007BB8A8 /* DisneyViewModel.swift in Sources */,
 				4BD9BECB2A1D600200F06212 /* DisneyMainVC.swift in Sources */,
 				4BBF2C172A1D611C007BB8A8 /* DisneyModel.swift in Sources */,
@@ -213,6 +212,7 @@
 				4BD9BEC72A1D600200F06212 /* AppDelegate.swift in Sources */,
 				4BD9BEC92A1D600200F06212 /* SceneDelegate.swift in Sources */,
 				4BBF2C192A1D624D007BB8A8 /* DisneyService.swift in Sources */,
+				4BF7DD072A31CF1800F98F92 /* CustomCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@ class DetailVC: UIViewController {
     private let contentView = UIView()
     private let vStack = UIStackView()
     private let FilmTableView = UITableView()
+    private let ShortFilmTableView = UITableView()
     private let alliesTableView = UITableView()
     private let enemiesTableView = UITableView()
     
@@ -49,6 +50,11 @@ class DetailVC: UIViewController {
         FilmTableView.delegate = self
         FilmTableView.dataSource = self
         
+        ShortFilmTableView.translatesAutoresizingMaskIntoConstraints = false
+        ShortFilmTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellShortFilm")
+        ShortFilmTableView.delegate = self
+        ShortFilmTableView.dataSource = self
+        
         alliesTableView.translatesAutoresizingMaskIntoConstraints = false
         alliesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellAllies")
         alliesTableView.delegate = self
@@ -65,10 +71,11 @@ class DetailVC: UIViewController {
         self.view.addSubview(scrollView)
         self.scrollView.addSubview(contentView)
         self.contentView.addSubview(FilmTableView)
+        self.contentView.addSubview(ShortFilmTableView)
         self.contentView.addSubview(alliesTableView)
         self.contentView.addSubview(enemiesTableView)
         
-        let height = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+        let height = contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor)
         height.priority = UILayoutPriority(1)
         height.isActive = true
         
@@ -87,14 +94,20 @@ class DetailVC: UIViewController {
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
+            FilmTableView.topAnchor.constraint(equalTo: contentView.topAnchor),
             FilmTableView.heightAnchor.constraint(equalToConstant: view.frame.height/4),
             FilmTableView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             
-            alliesTableView.topAnchor.constraint(equalToSystemSpacingBelow: FilmTableView.bottomAnchor, multiplier: 0),
+            ShortFilmTableView.topAnchor.constraint(equalToSystemSpacingBelow: FilmTableView.bottomAnchor, multiplier: 0),
+            ShortFilmTableView.heightAnchor.constraint(equalToConstant: view.frame.height/4),
+            ShortFilmTableView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            
+            alliesTableView.topAnchor.constraint(equalToSystemSpacingBelow: ShortFilmTableView.bottomAnchor, multiplier: 0),
             alliesTableView.heightAnchor.constraint(equalToConstant: view.frame.height/4),
             alliesTableView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             
             enemiesTableView.topAnchor.constraint(equalToSystemSpacingBelow: alliesTableView.bottomAnchor, multiplier: 0),
+            enemiesTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             enemiesTableView.heightAnchor.constraint(equalToConstant: view.frame.height/4),
             enemiesTableView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             
@@ -112,8 +125,11 @@ extension DetailVC : UITableViewDelegate,UITableViewDataSource {
         if tableView == FilmTableView {
             return viewModel.filmArray.count == 0 ? 1 : viewModel.filmArray.count
         }
+        else if tableView == ShortFilmTableView {
+            return viewModel.shortFilmsArray.count == 0 ? 1 : viewModel.shortFilmsArray.count
+        }
         else if tableView == alliesTableView {
-            return viewModel.allies.count == 0 ? 1 : viewModel.allies.count
+            return viewModel.alliesArray.count == 0 ? 1 : viewModel.alliesArray.count
         }
         else if tableView == enemiesTableView {
             return viewModel.enemiesArray.count == 0 ? 1 : viewModel.enemiesArray.count
@@ -127,9 +143,14 @@ extension DetailVC : UITableViewDelegate,UITableViewDataSource {
             cell.textLabel?.text = viewModel.filmArray.isEmpty ? "No films available" : viewModel.filmArray[indexPath.row]
             return cell
         }
+        if tableView == ShortFilmTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellShortFilm",for: indexPath)
+            cell.textLabel?.text = viewModel.shortFilmsArray.isEmpty ? "No short films available" : viewModel.shortFilmsArray[indexPath.row]
+            return cell
+        }
         else if tableView == alliesTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellAllies",for: indexPath)
-            cell.textLabel?.text = viewModel.allies.isEmpty ? "No Allies" : viewModel.allies[indexPath.row]
+            cell.textLabel?.text = viewModel.alliesArray.isEmpty ? "No Allies" : viewModel.alliesArray[indexPath.row]
             return cell
         }
         else if tableView == enemiesTableView {
@@ -143,6 +164,9 @@ extension DetailVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if tableView == FilmTableView {
             return "Films"
+        }
+        else if tableView == ShortFilmTableView {
+            return "Short Films"
         }
         else if tableView == alliesTableView {
             return "Allies"

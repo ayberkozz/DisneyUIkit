@@ -9,12 +9,11 @@ import UIKit
 
 class DisneyMainVC: UIViewController,DisneyViewModelOutput {
     
-    let tableView = UITableView()
+    var collectionView : UICollectionView!
     
     private let viewModel : DisneyViewModel
     private lazy var characters: [DisneyModel1] = []
 
-    
     init(viewModel: DisneyViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -27,15 +26,11 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
     
     func updateView(values: [DisneyModel1]) {
         characters = values
-        self.tableView.reloadData()
+        self.collectionView.reloadData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .blue
-        tableView.delegate = self
-        tableView.dataSource = self
         
         viewModel.fetchCharacters()
         
@@ -46,23 +41,25 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
     private func style(){
         title = "Disney Characters"
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .systemBackground
-        tableView.allowsSelection = true
-        tableView.register(CustomDisneyCell.self, forCellReuseIdentifier: CustomDisneyCell.identifier)
+        view.backgroundColor = .white
         
+        let layout = UICollectionViewFlowLayout()
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.identifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     private func layout() {
         
-        view.addSubview(tableView)
+        view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
     }
@@ -70,33 +67,28 @@ class DisneyMainVC: UIViewController,DisneyViewModelOutput {
 
 }
 
-//MARK: - Table View
-extension DisneyMainVC : UITableViewDelegate,UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//MARK: - Collection View
+extension DisneyMainVC: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return characters.count
     }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomDisneyCell.identifier, for: indexPath) as? CustomDisneyCell else {
-            fatalError("The Table View Could not a custom cell in vc")
-        }
-        
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCollectionViewCell", for: indexPath) as! CustomCollectionViewCell
         cell.configure(with: characters[indexPath.row])
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
-
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width/2-20, height: 250)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vm = DetailViewModel(characters[indexPath.row])
         let vc = DetailVC(vm)
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 88
-    }
-
-
 }
+
 

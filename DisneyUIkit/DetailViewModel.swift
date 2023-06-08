@@ -19,7 +19,11 @@ class DetailViewModel {
         return disney.films
     }
     
-    var allies: [String] {
+    var shortFilmsArray: [String] {
+        return disney.shortFilms
+    }
+    
+    var alliesArray: [String] {
         return disney.allies
     }
     
